@@ -1,16 +1,16 @@
 import 'package:flutter/widgets.dart';
 
-// 支持适配的平台
+// support platforms
 enum TEAdaptPlatform {
-  phone, //手机
-  dingDang, //叮当
-  padPortrait, // Pad 竖屏
-  padLandscape, // Pad 横屏
+  phone,
+  padPortrait, // Pad
+  padLandscape, // Pad
 }
 
-//用于保存当前适配的屏幕的相关数据
+// the data model for current screen-mode
 class InheritedScreenAdaptModel {
-  TEAdaptPlatform adaptModelKey; //当前适配的屏幕 key
+  TEAdaptPlatform adaptModelKey;
+
   InheritedScreenAdaptModel(this.adaptModelKey);
 
   @override
@@ -21,7 +21,6 @@ class InheritedScreenAdaptModel {
   int get hashCode => adaptModelKey.hashCode;
 }
 
-//构造新的屏幕适配模型
 InheritedScreenAdaptModel _adaptScreen({BuildContext context, TEAdaptPlatform screenKey}) {
   InheritedScreenAdaptModel model = new InheritedScreenAdaptModel(TEAdaptPlatform.phone);
   if (screenKey != null) {
@@ -31,22 +30,15 @@ InheritedScreenAdaptModel _adaptScreen({BuildContext context, TEAdaptPlatform sc
   return model;
 }
 
-// 执行函数回调
 Widget _invokeCallback(BuildContext context, WidgetBuilder builder) {
   return builder(context);
 }
 
-// 多屏幕适配策略
 Widget fetchAdaptWidget(BuildContext context, InheritedScreenAdaptModel model, Map<TEAdaptPlatform, WidgetBuilder> adapters) {
-  // TODO 适配策略得优化（最好是决策树模型，动态适配）
   Widget item;
-//  Widget item = _invokeCallback(context, adapters[TEAdaptPlatform.PHONE]); //默认用 phone 的适配
   switch (model.adaptModelKey) {
     case TEAdaptPlatform.phone:
       item = _invokeCallback(context, adapters[TEAdaptPlatform.phone]);
-      break;
-    case TEAdaptPlatform.dingDang:
-      item = _invokeCallback(context, adapters[TEAdaptPlatform.dingDang]);
       break;
     case TEAdaptPlatform.padLandscape:
       item = _invokeCallback(context, adapters[TEAdaptPlatform.padLandscape]);
@@ -62,10 +54,9 @@ Widget fetchAdaptWidget(BuildContext context, InheritedScreenAdaptModel model, M
 }
 
 class InheritedScreenAdaptWidget extends InheritedWidget {
-  //屏幕适配数据
   final InheritedScreenAdaptModel inheritedScreenAdaptModel;
 
-  final Function(BuildContext context, {TEAdaptPlatform screenKey}) onNewScreenMode; //适配新的屏幕模式
+  final Function(BuildContext context, {TEAdaptPlatform screenKey}) onNewScreenMode;
 
   InheritedScreenAdaptWidget({
     Key key,
@@ -85,7 +76,6 @@ class InheritedScreenAdaptWidget extends InheritedWidget {
   }
 }
 
-// 屏幕适配组件
 class ScreenAdaptWidget extends StatefulWidget {
   final Widget child;
   final TEAdaptPlatform platform;
@@ -99,10 +89,10 @@ class ScreenAdaptWidget extends StatefulWidget {
 }
 
 class _ScreenAdaptWidgetState extends State<ScreenAdaptWidget> {
-  InheritedScreenAdaptModel inheritedScreenAdaptModel; //屏幕适配模型
+  InheritedScreenAdaptModel inheritedScreenAdaptModel;
 
   _initData() {
-    inheritedScreenAdaptModel = _adaptScreen(screenKey: widget.platform); //初始化屏幕适配模型
+    inheritedScreenAdaptModel = _adaptScreen(screenKey: widget.platform);
   }
 
   @override

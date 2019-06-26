@@ -30,19 +30,12 @@ abstract class FlexibleState<T extends StatefulWidget> extends State<T> {
     return buildDingDang(context);
   }
 
-  /**
-   * 默认适配策略
-   */
   @protected
   Widget adaptStrategy(BuildContext context) {
     var inheritedContext = InheritedScreenAdaptWidget.of(context);
     final inheritedModel = inheritedContext.inheritedScreenAdaptModel;
-    return fetchAdaptWidget(context, inheritedModel, {
-      TEAdaptPlatform.phone: buildPhone,
-      TEAdaptPlatform.dingDang: buildDingDang,
-      TEAdaptPlatform.padPortrait: buildPadPortrait,
-      TEAdaptPlatform.padLandscape: buildPadLandscape
-    });
+    return fetchAdaptWidget(context, inheritedModel,
+        {TEAdaptPlatform.phone: buildPhone, TEAdaptPlatform.padPortrait: buildPadPortrait, TEAdaptPlatform.padLandscape: buildPadLandscape});
   }
 
   Widget build(BuildContext context) {

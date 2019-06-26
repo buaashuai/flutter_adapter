@@ -15,31 +15,21 @@ abstract class FlexibleStatelessWidget extends StatelessWidget {
   Widget buildPhone(BuildContext context);
 
   @protected
-  Widget buildDingDang(BuildContext context);
-
-  @protected
   Widget buildPadPortrait(BuildContext context) {
     return buildPhone(context);
   }
 
   @protected
   Widget buildPadLandscape(BuildContext context) {
-    return buildDingDang(context);
+    return buildPhone(context);
   }
 
-  /**
-   * 默认适配策略
-   */
   @protected
   Widget adaptStrategy(BuildContext context) {
     var inheritedContext = InheritedScreenAdaptWidget.of(context);
     final inheritedModel = inheritedContext.inheritedScreenAdaptModel;
-    return fetchAdaptWidget(context, inheritedModel, {
-      TEAdaptPlatform.phone: buildPhone,
-      TEAdaptPlatform.dingDang: buildDingDang,
-      TEAdaptPlatform.padPortrait: buildPadPortrait,
-      TEAdaptPlatform.padLandscape: buildPadLandscape
-    });
+    return fetchAdaptWidget(context, inheritedModel,
+        {TEAdaptPlatform.phone: buildPhone, TEAdaptPlatform.padPortrait: buildPadPortrait, TEAdaptPlatform.padLandscape: buildPadLandscape});
   }
 
   Widget build(BuildContext context) {
