@@ -7,9 +7,32 @@ enum TEAdaptPlatform {
   padLandscape, // Pad
 }
 
+InheritedScreenAdaptModel _adaptScreen({BuildContext context, String screenKey}) {
+  InheritedScreenAdaptModel model;
+  if (screenKey != null && screenKey != '') {
+    model = new InheritedScreenAdaptModel(screenKey);
+  } else {
+    model = new InheritedScreenAdaptModel(TEAdaptPlatform.phone.toString());
+  }
+//  print('ADAPT_SCREEN: adaptScreen:' + model.adaptModelKey.toString());
+  return model;
+}
+
+Widget _invokeCallback(BuildContext context, WidgetBuilder builder) {
+  return builder(context);
+}
+
+Widget fetchAdaptWidget(BuildContext context, InheritedScreenAdaptModel model, Map<String, WidgetBuilder> allAdapters) {
+  Widget item = Container();
+  if (allAdapters.containsKey(model.adaptModelKey)) {
+    item = _invokeCallback(context, allAdapters[model.adaptModelKey]);
+  }
+  return item;
+}
+
 // the data model for current screen-mode
 class InheritedScreenAdaptModel {
-  TEAdaptPlatform adaptModelKey;
+  String adaptModelKey;
 
   InheritedScreenAdaptModel(this.adaptModelKey);
 
@@ -21,42 +44,10 @@ class InheritedScreenAdaptModel {
   int get hashCode => adaptModelKey.hashCode;
 }
 
-InheritedScreenAdaptModel _adaptScreen({BuildContext context, TEAdaptPlatform screenKey}) {
-  InheritedScreenAdaptModel model = new InheritedScreenAdaptModel(TEAdaptPlatform.phone);
-  if (screenKey != null) {
-    model = new InheritedScreenAdaptModel(screenKey);
-  }
-//  print('ADAPT_SCREEN: adaptScreen:' + model.adaptModelKey.toString());
-  return model;
-}
-
-Widget _invokeCallback(BuildContext context, WidgetBuilder builder) {
-  return builder(context);
-}
-
-Widget fetchAdaptWidget(BuildContext context, InheritedScreenAdaptModel model, Map<TEAdaptPlatform, WidgetBuilder> adapters) {
-  Widget item;
-  switch (model.adaptModelKey) {
-    case TEAdaptPlatform.phone:
-      item = _invokeCallback(context, adapters[TEAdaptPlatform.phone]);
-      break;
-    case TEAdaptPlatform.padLandscape:
-      item = _invokeCallback(context, adapters[TEAdaptPlatform.padLandscape]);
-      break;
-    case TEAdaptPlatform.padPortrait:
-      item = _invokeCallback(context, adapters[TEAdaptPlatform.padPortrait]);
-      break;
-    default:
-      item = _invokeCallback(context, adapters[TEAdaptPlatform.phone]);
-      break;
-  }
-  return item;
-}
-
 class InheritedScreenAdaptWidget extends InheritedWidget {
   final InheritedScreenAdaptModel inheritedScreenAdaptModel;
 
-  final Function(BuildContext context, {TEAdaptPlatform screenKey}) onNewScreenMode;
+  final Function(BuildContext context, {String screenKey}) onNewScreenMode;
 
   InheritedScreenAdaptWidget({
     Key key,
@@ -78,9 +69,9 @@ class InheritedScreenAdaptWidget extends InheritedWidget {
 
 class ScreenAdaptWidget extends StatefulWidget {
   final Widget child;
-  final TEAdaptPlatform platform;
+  final String platform;
 
-  ScreenAdaptWidget({@required this.child, this.platform = TEAdaptPlatform.phone});
+  ScreenAdaptWidget({@required this.child, @required this.platform});
 
   @override
   State<StatefulWidget> createState() {
@@ -101,7 +92,7 @@ class _ScreenAdaptWidgetState extends State<ScreenAdaptWidget> {
     super.initState();
   }
 
-  _changeScreenModel(BuildContext context, {TEAdaptPlatform screenKey}) {
+  _changeScreenModel(BuildContext context, {String screenKey}) {
 //    String re = screenKey + new DateTime.now().toString();
     setState(() {
       inheritedScreenAdaptModel = _adaptScreen(context: context, screenKey: screenKey);

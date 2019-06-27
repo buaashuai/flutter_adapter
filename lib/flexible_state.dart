@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_adapter/adapter_screen.dart';
 
 abstract class FlexibleState<T extends StatefulWidget> extends State<T> {
+  final Map<String, WidgetBuilder> _allAdapters = {};
+
   @override
   T get widget => super.widget;
 
@@ -11,14 +13,8 @@ abstract class FlexibleState<T extends StatefulWidget> extends State<T> {
     return InheritedScreenAdaptWidget.of(context);
   }
 
-//  @protected
-//  Map<TEAdaptPlatform, WidgetBuilder> buildAdapters();
-
   @protected
   Widget buildPhone(BuildContext context);
-
-  @protected
-  Widget buildDingDang(BuildContext context);
 
   @protected
   Widget buildPadPortrait(BuildContext context) {
@@ -27,18 +23,33 @@ abstract class FlexibleState<T extends StatefulWidget> extends State<T> {
 
   @protected
   Widget buildPadLandscape(BuildContext context) {
-    return buildDingDang(context);
+    return buildPhone(context);
+  }
+
+  @protected
+  void addAdapter(String platformType, WidgetBuilder builder) {
+    if (_allAdapters.containsKey(platformType)) {
+      return;
+    }
+    _allAdapters[platformType] = builder;
+  }
+
+  @protected
+  void initAdapter() {
+    addAdapter(TEAdaptPlatform.phone.toString(), buildPhone);
+    addAdapter(TEAdaptPlatform.padPortrait.toString(), buildPadPortrait);
+    addAdapter(TEAdaptPlatform.padLandscape.toString(), buildPadLandscape);
   }
 
   @protected
   Widget adaptStrategy(BuildContext context) {
     var inheritedContext = InheritedScreenAdaptWidget.of(context);
     final inheritedModel = inheritedContext.inheritedScreenAdaptModel;
-    return fetchAdaptWidget(context, inheritedModel,
-        {TEAdaptPlatform.phone: buildPhone, TEAdaptPlatform.padPortrait: buildPadPortrait, TEAdaptPlatform.padLandscape: buildPadLandscape});
+    return fetchAdaptWidget(context, inheritedModel, _allAdapters);
   }
 
   Widget build(BuildContext context) {
+    initAdapter();
     return adaptStrategy(context);
   }
 }
