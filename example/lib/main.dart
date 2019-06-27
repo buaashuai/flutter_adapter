@@ -7,6 +7,7 @@ import 'package:flutter_adapter/flexible_state.dart';
 import 'package:flutter_adapter/flexible_stateless_widget.dart';
 import 'package:flutter_adapter/flutter_adapter.dart';
 import 'package:flutter_adapter_example/constant.dart';
+import 'package:flutter_adapter_example/page/custom_stateless_page.dart';
 import 'package:flutter_adapter_example/page/home.dart';
 import 'package:flutter_adapter_example/page/stateful_page.dart';
 import 'package:flutter_adapter_example/page/stateless_page.dart';
@@ -14,6 +15,8 @@ import 'package:flutter_adapter_example/page/stateless_page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final bool isCustomPlatform = false; //change this variable to true then you see a user self-defined adapter
+
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
@@ -25,10 +28,10 @@ class MyApp extends StatelessWidget {
             return !await Constant.globalNavigatorKey.currentState.maybePop();
           },
           child: ScreenAdaptWidget(
-            platform: TEAdaptPlatform.padLandscape.toString(),
+            platform: isCustomPlatform ? Constant.newPlatform : TEAdaptPlatform.phone.toString(),
             child: Navigator(
               key: Constant.globalNavigatorKey,
-              initialRoute: Constant.home,
+              initialRoute: isCustomPlatform ? Constant.page3 : Constant.home,
               onGenerateRoute: (settings) {
                 final route = generateRouteFor(settings);
                 if (route == null) {
@@ -78,6 +81,12 @@ Route generateRouteFor(RouteSettings settings) {
       name: name,
       animated: true,
       builder: (BuildContext context) => MyStatelessPage('I love flutter'),
+    );
+  } else if (name == Constant.page3) {
+    route = TEPageRoute(
+      name: name,
+      animated: true,
+      builder: (BuildContext context) => MyCustomStatelessPage('I love flutter'),
     );
   }
   return route;

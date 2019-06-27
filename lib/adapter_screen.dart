@@ -23,7 +23,9 @@ Widget _invokeCallback(BuildContext context, WidgetBuilder builder) {
 }
 
 Widget fetchAdaptWidget(BuildContext context, InheritedScreenAdaptModel model, Map<String, WidgetBuilder> allAdapters) {
-  Widget item = Container();
+  Widget item = Container(
+    child: Text('not found adapter ${model.adaptModelKey} in this widget'),
+  );
   if (allAdapters.containsKey(model.adaptModelKey)) {
     item = _invokeCallback(context, allAdapters[model.adaptModelKey]);
   }
