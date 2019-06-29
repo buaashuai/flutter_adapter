@@ -15,7 +15,7 @@ import 'package:flutter_adapter_example/page/stateless_page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final bool isCustomPlatform = false; //change this variable to true then you see a user self-defined adapter
+  final bool isCustomPlatform = false; //change this variable to true then you will see a user self-defined adapter example
 
   @override
   Widget build(BuildContext context) {
