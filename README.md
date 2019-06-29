@@ -64,7 +64,7 @@ class MyStatefulPageState extends FlexibleState<MyStatefulPage> {
 </tr>
 <tr>
 <td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "240" height = "500" /></td>
-<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/NewPlatform.gif" width = "240" height = "500" /></td>
+<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/NewPlatform.png" width = "240" height = "500" /></td>
 </tr>
 </table>
 
