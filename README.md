@@ -20,7 +20,7 @@
 ## 使用方式
 
 flutter_adapter插件内置了3类平台，分别是：手机（TEAdaptPlatform.phone）、pad横屏（TEAdaptPlatform.padLandscape）、pad竖屏（TEAdaptPlatform.padPortrait）
-。如果你只适配部分平台，那么只需要对需要适配的widget实现特定平台的build函数即可，其他未适配的平台默认会返回Phone的样式。<br>
+。如果你只适配部分平台，那么只需要对待适配的widget实现特定平台的build函数即可，其他未适配的平台默认会返回Phone的样式。<br>
 使用的时候只需要在APP的入口处采用ScreenAdaptWidget，然后设置当前APP需要适配的平台名称即可。
 
 ### 插件使用示例：
