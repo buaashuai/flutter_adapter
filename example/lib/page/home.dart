@@ -151,7 +151,6 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
   Widget buildPadLandscape(BuildContext context) {
     return Container(
       height: 400.0,
-      width: 600.0,
       child: Row(
         children: <Widget>[
           Expanded(
