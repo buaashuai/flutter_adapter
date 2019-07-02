@@ -2,7 +2,7 @@
 
 A plugin that adapts the flutter application to different platforms, allowing your flutter application to flexibly and efficiently adapt to various platforms in the same flutter project, maximizing UI multiplexing, and sharing business logic code across different platforms.
 <br><br>
-<font size=8>[Readme for Chinese](https://github.com/buaashuai/flutter_adapter/blob/master/README-ch.md)</font>
+<font size=8>[Readme for Chinese](https://github.com/buaashuai/flutter_adapter/blob/master/README-cn.md)</font>
 
 # Preview
 
