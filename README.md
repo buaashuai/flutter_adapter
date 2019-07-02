@@ -13,7 +13,7 @@ A plugin that adapts the flutter application to different platforms, allowing yo
 </tr>
 </table>
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadLandscape.gif" width = "960" height = "600" />
-<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "480" height = "768" />
+<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "600" height = "960" />
 
 ## Usage
 
@@ -25,7 +25,7 @@ When you use flutter_adapter, you only need to use ScreenAdaptWidget at the entr
 ```
 ScreenAdaptWidget(
     platform: TEAdaptPlatform.phone.toString(),
-    child: 任意widget
+    child: any widget
 )),
 ```
 
