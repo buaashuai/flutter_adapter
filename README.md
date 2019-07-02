@@ -2,7 +2,7 @@
 
 A plugin that adapts the flutter application to different platforms, allowing your flutter application to flexibly and efficiently adapt to various platforms in the same flutter project, maximizing UI multiplexing, and sharing business logic code across different platforms.
 <br><br>
-<font size=6>[Readme for Chinese](https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/README-ch.md)</font>
+<font size=8>[Readme for Chinese](https://github.com/buaashuai/flutter_adapter/blob/master/README-ch.md)</font>
 
 # Preview
 
@@ -17,10 +17,10 @@ A plugin that adapts the flutter application to different platforms, allowing yo
 
 ## Usage
 
-The flutter_adapter plugin has three built-in platforms: mobile phone (TEAdaptPlatform.phone), pad horizontal screen (TEAdaptPlatform.padLandscape), pad vertical screen (TEAdaptPlatform.padPortrait). If you only need to adapt part of platforms, you only need to make the widget implement the platform-specific build function. Other unsuited platforms will return the Phone style by default. <br><br>
-When you use flutter_adapter, you only need to use ScreenAdaptWidget at the entrance of the app, and then set the platform name that the current APP needs to adapt.
+The flutter_adapter plugin has three built-in platforms: mobile phone (TEAdaptPlatform.phone), pad horizontal screen (TEAdaptPlatform.padLandscape), pad vertical screen (TEAdaptPlatform.padPortrait). If you only need to adapt part of platforms, you only need to make the widget implement the platform-specific build function. Other unsuited platforms will return the Phone style by default.
 
 ### Example
+When you use flutter_adapter, you only need to use ScreenAdaptWidget at the entrance of the app, and then set the platform name that the current APP needs to adapt.
 
 ```
 ScreenAdaptWidget(
@@ -28,8 +28,9 @@ ScreenAdaptWidget(
     child: 任意widget
 )),
 ```
-If one of your StatelessWidgets needs to be adapted to a particular platform, just pass the widget from the FlexibleStatelessWidget and implement the platform-specific build function.
+
 ### StatelessWidget Example
+If one of your StatelessWidgets needs to be adapted to a particular platform, just pass the widget from the FlexibleStatelessWidget and implement the platform-specific build function.
 
 ```
 class MyStatelessPage extends FlexibleStatelessWidget {
@@ -51,8 +52,10 @@ class MyStatelessPage extends FlexibleStatelessWidget {
 }
 ```
 
-If one of your StatefulWidgets needs to be adapted to a specific platform, you only need to inherit the State corresponding to the StatefulWidget from FlexibleState, and then implement the build function of the specific platform.
+
 ### StatefulWidget Example
+If one of your StatefulWidgets needs to be adapted to a specific platform, you only need to inherit the State corresponding to the StatefulWidget from FlexibleState, and then implement the build function of the specific platform.
+
 ```
 class MyStatefulPageState extends FlexibleState<MyStatefulPage> {
 
@@ -72,6 +75,7 @@ class MyStatefulPageState extends FlexibleState<MyStatefulPage> {
   }
 }
 ```
+
 # License
 
 Copyright (C) 2019 The Android Open Source Project <br>
