@@ -1,10 +1,9 @@
 # flutter_adapter
 
-A plugin that adapts the flutter application to different platforms, allowing your flutter application to flexibly and efficiently adapt to various platforms in the same flutter project, maximizing UI multiplexing, and sharing business logic code across different platforms.
-<br><br>
-<font size=6>[Readme for Chinese](https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/README-ch.md)</font>
+一个解决flutter应用适配不同平台的插件，让你的flutter应用在一个工程中灵活高效的适配各种平台，实现UI最大化复用，业务逻辑代码在不同平台间完全共享。
 
-# Preview
+
+# 不同平台适配效果
 
 <table>
 <tr>
@@ -15,12 +14,13 @@ A plugin that adapts the flutter application to different platforms, allowing yo
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadLandscape.gif" width = "960" height = "600" />
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "480" height = "768" />
 
-## Usage
+## 使用方式
 
-The flutter_adapter plugin has three built-in platforms: mobile phone (TEAdaptPlatform.phone), pad horizontal screen (TEAdaptPlatform.padLandscape), pad vertical screen (TEAdaptPlatform.padPortrait). If you only need to adapt part of platforms, you only need to make the widget implement the platform-specific build function. Other unsuited platforms will return the Phone style by default. <br><br>
-When you use flutter_adapter, you only need to use ScreenAdaptWidget at the entrance of the app, and then set the platform name that the current APP needs to adapt.
+flutter_adapter插件内置了3类平台，分别是：手机（TEAdaptPlatform.phone）、pad横屏（TEAdaptPlatform.padLandscape）、pad竖屏（TEAdaptPlatform.padPortrait）
+。如果你只适配部分平台，那么只需要对待适配的widget实现特定平台的build函数即可，其他未适配的平台默认会返回Phone的样式。<br>
+使用的时候只需要在APP的入口处采用ScreenAdaptWidget，然后设置当前APP需要适配的平台名称即可。
 
-### Example
+### 插件使用示例：
 
 ```
 ScreenAdaptWidget(
@@ -28,8 +28,8 @@ ScreenAdaptWidget(
     child: 任意widget
 )),
 ```
-If one of your StatelessWidgets needs to be adapted to a particular platform, just pass the widget from the FlexibleStatelessWidget and implement the platform-specific build function.
-### StatelessWidget Example
+如果你的某个StatelessWidget需要适配特定平台，只需要将该widget继承自FlexibleStatelessWidget，然后实现特定平台的build函数即可。
+### StatelessWidget适配示例：
 
 ```
 class MyStatelessPage extends FlexibleStatelessWidget {
@@ -50,9 +50,8 @@ class MyStatelessPage extends FlexibleStatelessWidget {
   }
 }
 ```
-
-If one of your StatefulWidgets needs to be adapted to a specific platform, you only need to inherit the State corresponding to the StatefulWidget from FlexibleState, and then implement the build function of the specific platform.
-### StatefulWidget Example
+### StatefulWidget适配示例：
+如果你的某个StatefulWidget需要适配特定平台，只需要将该StatefulWidget对应的的State继承自FlexibleState，然后实现特定平台的build函数即可，例如：
 ```
 class MyStatefulPageState extends FlexibleState<MyStatefulPage> {
 
