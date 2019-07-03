@@ -1,3 +1,3 @@
-## 0.0.1
+## 1.0
 
-* TODO: Describe initial release.
+* Implement cross-platform adaptation of widget and cross-platform adaptation of attribute values
