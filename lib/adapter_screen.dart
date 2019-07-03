@@ -18,6 +18,17 @@ InheritedScreenAdaptModel _adaptScreen({BuildContext context, String screenKey})
   return model;
 }
 
+//adapt dart object
+dynamic superObjectAdapter(BuildContext context, Map<String, dynamic> adaptObjects) {
+  dynamic result;
+  var inheritedContext = InheritedScreenAdaptWidget.of(context);
+  final inheritedModel = inheritedContext.inheritedScreenAdaptModel;
+  if (adaptObjects.containsKey(inheritedModel.adaptModelKey)) {
+    result = adaptObjects[inheritedModel.adaptModelKey];
+  }
+  return result;
+}
+
 Widget _invokeCallback(BuildContext context, WidgetBuilder builder) {
   return builder(context);
 }

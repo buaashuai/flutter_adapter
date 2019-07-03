@@ -76,6 +76,55 @@ class MyStatefulPageState extends FlexibleState<MyStatefulPage> {
 }
 ```
 
+### Normal Widget Example
+If one of your widgets only needs to change the value of an individual attribute value on a different platform, then only a cross-platform adaptation of the specific attribute is required. flutter_adapter provides a ```superObjectAdapter ``` function to solve the cross-platform adaptation problem of attribute values.
+
+```
+class MyNormalPage extends StatelessWidget {
+  final String textStr;
+
+  MyNormalPage(this.textStr);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('page normal'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(bottom: 30.0),
+            width: double.infinity,
+            height: 100.0,
+            color: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): Colors.yellow, TEAdaptPlatform.padPortrait.toString(): Colors.greenAccent}),
+            child: Center(
+              child: Text(
+                '$textStr ${superObjectAdapter(context, {
+                  TEAdaptPlatform.phone.toString(): "[Phone]",
+                  TEAdaptPlatform.padPortrait.toString(): "[PadPortrait]"
+                })}',
+                style: TextStyle(
+                    fontSize: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): 18.0, TEAdaptPlatform.padPortrait.toString(): 38.0}),
+                    color: Colors.black),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+<table>
+<tr>
+<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/normalPhone.png" width = "240" height = "500" /></td>
+<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/normalPadPortrait.png" width = "240" height = "500" /></td>
+</tr>
+</table>
+
 # License
 
 Copyright (C) 2019 The Android Open Source Project <br>

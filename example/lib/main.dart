@@ -9,6 +9,7 @@ import 'package:flutter_adapter/flutter_adapter.dart';
 import 'package:flutter_adapter_example/constant.dart';
 import 'package:flutter_adapter_example/page/custom_stateless_page.dart';
 import 'package:flutter_adapter_example/page/home.dart';
+import 'package:flutter_adapter_example/page/normal_page.dart';
 import 'package:flutter_adapter_example/page/stateful_page.dart';
 import 'package:flutter_adapter_example/page/stateless_page.dart';
 
@@ -87,6 +88,12 @@ Route generateRouteFor(RouteSettings settings) {
       name: name,
       animated: true,
       builder: (BuildContext context) => MyCustomStatelessPage('I love flutter'),
+    );
+  } else if (name == Constant.page4) {
+    route = TEPageRoute(
+      name: name,
+      animated: true,
+      builder: (BuildContext context) => MyNormalPage('I love flutter'),
     );
   }
   return route;

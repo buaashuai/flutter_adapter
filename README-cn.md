@@ -71,6 +71,57 @@ class MyStatefulPageState extends FlexibleState<MyStatefulPage> {
   }
 }
 ```
+
+
+### 普通Widget适配示例：
+如果你的某个widget仅仅需要在不同平台中改变个别属性的值，那么只需要对特定的属性值进行跨平台适配即可，flutter_adapter提供了superObjectAdapter函数来解决属性值的跨平台适配难题。
+
+```
+class MyNormalPage extends StatelessWidget {
+  final String textStr;
+
+  MyNormalPage(this.textStr);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('page normal'),
+      ),
+      body: Column(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(bottom: 30.0),
+            width: double.infinity,
+            height: 100.0,
+            color: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): Colors.yellow, TEAdaptPlatform.padPortrait.toString(): Colors.greenAccent}),
+            child: Center(
+              child: Text(
+                '$textStr ${superObjectAdapter(context, {
+                  TEAdaptPlatform.phone.toString(): "[Phone]",
+                  TEAdaptPlatform.padPortrait.toString(): "[PadPortrait]"
+                })}',
+                style: TextStyle(
+                    fontSize: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): 18.0, TEAdaptPlatform.padPortrait.toString(): 38.0}),
+                    color: Colors.black),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+```
+
+<table>
+<tr>
+<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/normalPhone.png" width = "240" height = "500" /></td>
+<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/normalPadPortrait.png" width = "240" height = "500" /></td>
+</tr>
+</table>
+
 # License
 
 Copyright (C) 2019 The Android Open Source Project <br>
