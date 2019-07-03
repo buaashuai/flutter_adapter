@@ -13,6 +13,6 @@ abstract class CustomFlexibleState<T extends StatefulWidget> extends FlexibleSta
   @protected
   void initAdapter() {
     super.initAdapter();
-    addAdapter(Constant.newPlatform, buildNewPlatform);
+    addAdapter(Constant.newPlatform, buildNewPlatform); // register new Platform
   }
 }

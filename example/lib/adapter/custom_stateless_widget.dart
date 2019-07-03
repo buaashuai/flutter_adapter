@@ -13,7 +13,7 @@ abstract class CustomFlexibleStatelessWidget extends FlexibleStatelessWidget {
   @protected
   void initAdapter() {
     super.initAdapter();
-    addAdapter(Constant.newPlatform, buildNewPlatform);
+    addAdapter(Constant.newPlatform, buildNewPlatform); // register new Platform
 //    print('add newPlatform');
   }
 }

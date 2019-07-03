@@ -3,14 +3,9 @@
 一个解决flutter应用适配不同平台的插件，让你的flutter应用在一个工程中灵活高效的适配各种平台，实现UI最大化复用，业务逻辑代码在不同平台间完全共享。
 
 
-# 不同平台适配效果
+## 不同平台适配效果
 
-<table>
-<tr>
-<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/phone.gif" width = "240" height = "500" /></td>
-<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/NewPlatform.png" width = "240" height = "500" /></td>
-</tr>
-</table>
+<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/phone.gif" width = "240" height = "500" />
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadLandscape.gif" width = "960" height = "600" />
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "480" height = "768" />
 
@@ -19,6 +14,8 @@
 flutter_adapter插件内置了3类平台，分别是：手机（TEAdaptPlatform.phone）、pad横屏（TEAdaptPlatform.padLandscape）、pad竖屏（TEAdaptPlatform.padPortrait）
 。如果你只适配部分平台，那么只需要对待适配的widget实现特定平台的build函数即可，其他未适配的平台默认会返回Phone的样式。<br>
 使用的时候只需要在APP的入口处采用ScreenAdaptWidget，然后设置当前APP需要适配的平台名称即可。
+
+如果你需要扩展适配的平台，对于StatelessWidget只需要实现一个继承自FlexibleStatelessWidget的抽象类，然后实现新平台的build函数并注册该平台即可；对于StatefulWidget只需要实现一个继承自FlexibleState的抽象类，然后实现新平台的build函数并注册该平台即可。
 
 ### 插件使用示例：
 
@@ -121,6 +118,85 @@ class MyNormalPage extends StatelessWidget {
 <td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/normalPadPortrait.png" width = "240" height = "500" /></td>
 </tr>
 </table>
+
+## 扩展需要适配的平台
+插件内置的3个平台在实际使用的过程中可能不够用，因此我们提供了用户自定义平台的适配解决方案。
+### StatelessWidget适配新平台
+对于StatelessWidget只需要实现一个继承自FlexibleStatelessWidget的抽象类，然后实现新平台的build函数，之后注册该平台即可。
+```
+abstract class CustomFlexibleStatelessWidget extends FlexibleStatelessWidget {
+  @protected
+  Widget buildNewPlatform(BuildContext context) {
+    return buildPhone(context); // by default, you can return the phone's style
+  }
+
+  @protected
+  void initAdapter() {
+    super.initAdapter();
+    addAdapter(Constant.newPlatform, buildNewPlatform);// register new Platform
+  }
+}
+```
+#### StatelessWidget适配新平台示例：
+```
+class MyStatelessPage extends CustomFlexibleStatelessWidget {
+
+  @override
+  Widget buildPhone(BuildContext context) {
+    return Text('Phone',style: TextStyle(fontSize: 18.0),);
+  }
+
+  @override
+  Widget buildPadPortrait(BuildContext context) {
+    return Text('PadPortrait',style: TextStyle(fontSize: 22.0),);
+  }
+
+  @override
+  Widget buildNewPlatform(BuildContext context) {
+    return Text('buildNewPlatform',style: TextStyle(fontSize: 30.0),);
+  }
+}
+```
+
+#### StatefulWidget适配新平台
+对于StatefulWidget只需要实现一个继承自FlexibleState的抽象类，然后实现新平台的build函数，之后注册该平台即可。
+
+```
+abstract class CustomFlexibleState<T extends StatefulWidget> extends FlexibleState<T> {
+  @protected
+  Widget buildNewPlatform(BuildContext context) {
+    return buildPhone(context); // by default, you can return the phone's style
+  }
+
+  @protected
+  void initAdapter() {
+    super.initAdapter();
+    addAdapter(Constant.newPlatform, buildNewPlatform);// register new Platform
+  }
+}
+```
+#### StatefulWidget适配新平台示例：
+```
+class MyStatefulPageState extends CustomFlexibleState<MyStatefulPage> {
+
+  @override
+  Widget buildPhone(BuildContext context) {
+    return Text('Phone',style: TextStyle(fontSize: 18.0),);
+  }
+
+  @override
+  Widget buildPadPortrait(BuildContext context) {
+    return Text('PadPortrait',style: TextStyle(fontSize: 22.0),);
+  }
+
+  @override
+  Widget buildNewPlatform(BuildContext context) {
+    return Text('NewPlatform',style: TextStyle(fontSize: 30.0),);
+  }
+}
+```
+
+<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/NewPlatform.png" width = "240" height = "500" />
 
 # License
 

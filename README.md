@@ -6,18 +6,15 @@ A plugin that adapts the flutter application to different platforms, allowing yo
 
 # Preview
 
-<table>
-<tr>
-<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/phone.gif" width = "240" height = "500" /></td>
-<td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/NewPlatform.png" width = "240" height = "500" /></td>
-</tr>
-</table>
+<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/phone.gif" width = "240" height = "500" />
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadLandscape.gif" width = "960" height = "600" />
-<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "600" height = "960" />
+<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "480" height = "768" />
 
 ## Usage
 
 The flutter_adapter plugin has three built-in platforms: mobile phone (TEAdaptPlatform.phone), pad horizontal screen (TEAdaptPlatform.padLandscape), pad vertical screen (TEAdaptPlatform.padPortrait). If you only need to adapt part of platforms, you only need to make the widget implement the platform-specific build function. Other unsuited platforms will return the Phone style by default.
+
+If you need to extend the adapted platform, you only need to implement an abstract class that inherits from FlexibleStatelessWidget for StatelessWidget, then implement the build function of the new platform and register the platform. As for StatefulWidget, you only need to implement an abstract class that inherits from FlexibleState, and then Implement the build function of the new platform and register the platform.
 
 ### Example
 When you use flutter_adapter, you only need to use ScreenAdaptWidget at the entrance of the app, and then set the platform name that the current APP needs to adapt.
@@ -124,6 +121,87 @@ class MyNormalPage extends StatelessWidget {
 <td><img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/normalPadPortrait.png" width = "240" height = "500" /></td>
 </tr>
 </table>
+
+## Extend the platform that needs to be adapted
+The three platforms built into the plug-in may not be sufficient in the actual use process, so we provide an adaptation solution for the user-defined platform.
+
+### StatelessWidget adapts to the new platform
+For StatelessWidget, you only need to implement an abstract class that inherits from FlexibleStatelessWidget, and then implement the build function of the new platform, and then register the platform.
+
+```
+abstract class CustomFlexibleStatelessWidget extends FlexibleStatelessWidget {
+  @protected
+  Widget buildNewPlatform(BuildContext context) {
+    return buildPhone(context); // by default, you can return the phone's style
+  }
+
+  @protected
+  void initAdapter() {
+    super.initAdapter();
+    addAdapter(Constant.newPlatform, buildNewPlatform);// register new Platform
+  }
+}
+```
+#### StatelessWidget adaptation new platform example:
+```
+class MyStatelessPage extends CustomFlexibleStatelessWidget {
+
+  @override
+  Widget buildPhone(BuildContext context) {
+    return Text('Phone',style: TextStyle(fontSize: 18.0),);
+  }
+
+  @override
+  Widget buildPadPortrait(BuildContext context) {
+    return Text('PadPortrait',style: TextStyle(fontSize: 22.0),);
+  }
+
+  @override
+  Widget buildNewPlatform(BuildContext context) {
+    return Text('buildNewPlatform',style: TextStyle(fontSize: 30.0),);
+  }
+}
+```
+
+#### StatefulWidget adapts to the new platform
+For StatefulWidget, you only need to implement an abstract class that inherits from FlexibleState, and then implement the build function of the new platform, and then register the platform.
+
+```
+abstract class CustomFlexibleState<T extends StatefulWidget> extends FlexibleState<T> {
+  @protected
+  Widget buildNewPlatform(BuildContext context) {
+    return buildPhone(context); // by default, you can return the phone's style
+  }
+
+  @protected
+  void initAdapter() {
+    super.initAdapter();
+    addAdapter(Constant.newPlatform, buildNewPlatform);// register new Platform
+  }
+}
+```
+#### StatefulWidget adaptation new platform example:
+```
+class MyStatefulPageState extends CustomFlexibleState<MyStatefulPage> {
+
+  @override
+  Widget buildPhone(BuildContext context) {
+    return Text('Phone',style: TextStyle(fontSize: 18.0),);
+  }
+
+  @override
+  Widget buildPadPortrait(BuildContext context) {
+    return Text('PadPortrait',style: TextStyle(fontSize: 22.0),);
+  }
+
+  @override
+  Widget buildNewPlatform(BuildContext context) {
+    return Text('NewPlatform',style: TextStyle(fontSize: 30.0),);
+  }
+}
+```
+
+<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/NewPlatform.png" width = "240" height = "500" />
 
 # License
 
