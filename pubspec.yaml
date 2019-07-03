@@ -1,8 +1,8 @@
 name: flutter_adapter
-description: A new flutter plugin project.
+description: A plugin that adapts the flutter application to different platforms, allowing your flutter application to flexibly and efficiently adapt to various platforms in the same flutter project, maximizing UI multiplexing, and sharing business logic code across different platforms.
 version: 1.0
-author:
-homepage:
+author: WeslyWang <909104292@qq.com>
+homepage: https://github.com/buaashuai/flutter_adapter
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
