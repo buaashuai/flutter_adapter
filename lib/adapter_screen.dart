@@ -7,7 +7,8 @@ enum TEAdaptPlatform {
   padLandscape, // Pad
 }
 
-InheritedScreenAdaptModel _adaptScreen({BuildContext context, String screenKey}) {
+InheritedScreenAdaptModel _adaptScreen(
+    {BuildContext context, String screenKey}) {
   InheritedScreenAdaptModel model;
   if (screenKey != null && screenKey != '') {
     model = new InheritedScreenAdaptModel(screenKey);
@@ -19,7 +20,8 @@ InheritedScreenAdaptModel _adaptScreen({BuildContext context, String screenKey})
 }
 
 //adapt dart object
-dynamic superObjectAdapter(BuildContext context, Map<String, dynamic> adaptObjects) {
+dynamic superObjectAdapter(
+    BuildContext context, Map<String, dynamic> adaptObjects) {
   dynamic result;
   var inheritedContext = InheritedScreenAdaptWidget.of(context);
   final inheritedModel = inheritedContext.inheritedScreenAdaptModel;
@@ -33,7 +35,8 @@ Widget _invokeCallback(BuildContext context, WidgetBuilder builder) {
   return builder(context);
 }
 
-Widget fetchAdaptWidget(BuildContext context, InheritedScreenAdaptModel model, Map<String, WidgetBuilder> allAdapters) {
+Widget fetchAdaptWidget(BuildContext context, InheritedScreenAdaptModel model,
+    Map<String, WidgetBuilder> allAdapters) {
   Widget item = Container(
     child: Text('not found adapter ${model.adaptModelKey} in this widget'),
   );
@@ -51,7 +54,10 @@ class InheritedScreenAdaptModel {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is InheritedScreenAdaptModel && runtimeType == other.runtimeType && adaptModelKey == other.adaptModelKey;
+      identical(this, other) ||
+      other is InheritedScreenAdaptModel &&
+          runtimeType == other.runtimeType &&
+          adaptModelKey == other.adaptModelKey;
 
   @override
   int get hashCode => adaptModelKey.hashCode;
@@ -108,13 +114,17 @@ class _ScreenAdaptWidgetState extends State<ScreenAdaptWidget> {
   _changeScreenModel(BuildContext context, {String screenKey}) {
 //    String re = screenKey + new DateTime.now().toString();
     setState(() {
-      inheritedScreenAdaptModel = _adaptScreen(context: context, screenKey: screenKey);
+      inheritedScreenAdaptModel =
+          _adaptScreen(context: context, screenKey: screenKey);
     });
 //    print('ADAPT_SCREEN: _changeScreenModel phone: ' + screenKey.toString());
   }
 
   @override
   Widget build(BuildContext context) {
-    return new InheritedScreenAdaptWidget(inheritedScreenAdaptModel: inheritedScreenAdaptModel, onNewScreenMode: _changeScreenModel, child: widget.child);
+    return new InheritedScreenAdaptWidget(
+        inheritedScreenAdaptModel: inheritedScreenAdaptModel,
+        onNewScreenMode: _changeScreenModel,
+        child: widget.child);
   }
 }
