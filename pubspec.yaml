@@ -1,6 +1,6 @@
 name: flutter_adapter
 description: Let your flutter application adapt to various platforms flexibly and efficiently, maximizing UI multiplexing.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/buaashuai/flutter_adapter
 
 environment:
