@@ -71,7 +71,8 @@ class MyStatefulPageState extends FlexibleState<MyStatefulPage> {
 
 
 ### 普通Widget适配示例：
-如果你的某个widget仅仅需要在不同平台中改变个别属性的值，那么只需要对特定的属性值进行跨平台适配即可，flutter_adapter提供了superObjectAdapter函数来解决属性值的跨平台适配难题。
+1、如果你的某个widget需要在不同平台中改变个别属性的值，那么只需要对特定的属性值进行跨平台适配即可，flutter_adapter提供了superObjectAdapter函数来解决属性值的跨平台适配难题。<br>
+2、如果你的某个函数需要在不同平台中执行不同的逻辑，那么只需要对特定的函数执行逻辑进行跨平台适配即可，flutter_adapter提供了superFunctionAdapter函数来解决不同函数调用的跨平台适配难题（例如：可以让一个按钮的点击事件在不同平台中执行不同的逻辑）。
 
 ```
 class MyNormalPage extends StatelessWidget {
@@ -87,21 +88,33 @@ class MyNormalPage extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(10.0),
-            margin: EdgeInsets.only(bottom: 30.0),
-            width: double.infinity,
-            height: 100.0,
-            color: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): Colors.yellow, TEAdaptPlatform.padPortrait.toString(): Colors.greenAccent}),
-            child: Center(
-              child: Text(
-                '$textStr ${superObjectAdapter(context, {
-                  TEAdaptPlatform.phone.toString(): "[Phone]",
+          GestureDetector(
+            onTap: () {
+              superFunctionAdapter(context, {
+                TEAdaptPlatform.phone.toString(): () {
+                  print('tab me on ${TEAdaptPlatform.phone.toString()}');
+                },
+                TEAdaptPlatform.padPortrait.toString(): () {
+                  print('tab me on ${TEAdaptPlatform.padPortrait.toString()}');
+                },
+              });
+            },
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              margin: EdgeInsets.only(bottom: 30.0),
+              width: double.infinity,
+              height: 100.0,
+              color: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): Colors.yellow, TEAdaptPlatform.padPortrait.toString(): Colors.greenAccent}),
+              child: Center(
+                child: Text(
+                  '$textStr ${superObjectAdapter(context, {
+                    TEAdaptPlatform.phone.toString(): "[Phone]",
                   TEAdaptPlatform.padPortrait.toString(): "[PadPortrait]"
-                })}',
-                style: TextStyle(
-                    fontSize: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): 18.0, TEAdaptPlatform.padPortrait.toString(): 38.0}),
-                    color: Colors.black),
+                  })}',
+                  style: TextStyle(
+                      fontSize: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): 18.0, TEAdaptPlatform.padPortrait.toString(): 38.0}),
+                      color: Colors.black),
+                ),
               ),
             ),
           ),
