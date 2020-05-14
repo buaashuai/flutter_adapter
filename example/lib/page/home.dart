@@ -163,6 +163,26 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
             ),
           ),
         ),
+        GestureDetector(
+          onTap: () {
+            Constant.globalNavigatorKey.currentState.pushNamed(
+              Constant.page4,
+            );
+          },
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(bottom: 30.0),
+            width: double.infinity,
+            height: 200.0,
+            color: Colors.lightGreenAccent,
+            child: Center(
+              child: Text(
+                '${widget.textStr} [PadPortrait] [click me]',
+                style: TextStyle(fontSize: 18.0, color: Colors.black),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

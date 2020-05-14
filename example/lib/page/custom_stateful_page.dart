@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_adapter/flexible_stateless_widget.dart';
+import 'package:flutter_adapter_example/adapter/custom_state.dart';
 import 'package:flutter_adapter_example/adapter/custom_stateless_widget.dart';
 import 'package:flutter_adapter_example/constant.dart';
 
-class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
+class MyCustomStatefulPage extends StatefulWidget {
   final String textStr;
 
-  MyCustomStatelessPage(this.textStr);
+  MyCustomStatefulPage(this.textStr);
+
+  @override
+  State<StatefulWidget> createState() {
+    return MyCustomStatefulPageState();
+  }
+}
+
+class MyCustomStatefulPageState extends CustomFlexibleState<MyCustomStatefulPage> {
+  int num = 1;
+  int num2 = 1;
 
   @override
   Widget buildNewPlatform(BuildContext context) {
@@ -18,9 +29,9 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
         children: <Widget>[
           GestureDetector(
             onTap: () {
-              Constant.globalNavigatorKey.currentState.pushNamed(
-                Constant.page5,
-              );
+              setState(() {
+                num = num + 1;
+              });
             },
             child: Container(
               padding: EdgeInsets.all(10.0),
@@ -30,7 +41,7 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
               color: Colors.yellow,
               child: Center(
                 child: Text(
-                  '$textStr [NewPlatform] [click me]',
+                  '${widget.textStr} [NewPlatform]  [click me]-$num',
                   style: TextStyle(fontSize: 18.0, color: Colors.black),
                 ),
               ),
@@ -38,9 +49,9 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              Constant.globalNavigatorKey.currentState.pushNamed(
-                Constant.page4,
-              );
+              setState(() {
+                num2 = num2 + 1;
+              });
             },
             child: Container(
               padding: EdgeInsets.all(10.0),
@@ -50,7 +61,7 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
               color: Colors.lightGreenAccent,
               child: Center(
                 child: Text(
-                  '$textStr [NewPlatform] [click me]',
+                  '${widget.textStr} [NewPlatform]  [click me]-$num2',
                   style: TextStyle(fontSize: 18.0, color: Colors.black),
                 ),
               ),
@@ -77,7 +88,7 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
             color: Colors.yellow,
             child: Center(
               child: Text(
-                '$textStr [Phone]',
+                '${widget.textStr} [Phone]',
                 style: TextStyle(fontSize: 18.0, color: Colors.black),
               ),
             ),
@@ -90,7 +101,7 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
             color: Colors.lightGreenAccent,
             child: Center(
               child: Text(
-                '$textStr [Phone]',
+                '${widget.textStr} [Phone]',
                 style: TextStyle(fontSize: 18.0, color: Colors.black),
               ),
             ),
@@ -116,7 +127,7 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
             color: Colors.yellow,
             child: Center(
               child: Text(
-                '$textStr [PadPortrait]',
+                '${widget.textStr} [PadPortrait]',
                 style: TextStyle(fontSize: 18.0, color: Colors.black),
               ),
             ),
@@ -129,7 +140,7 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
             color: Colors.lightGreenAccent,
             child: Center(
               child: Text(
-                '$textStr [PadPortrait]',
+                '${widget.textStr} [PadPortrait]',
                 style: TextStyle(fontSize: 18.0, color: Colors.black),
               ),
             ),
@@ -155,7 +166,7 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
             color: Colors.yellow,
             child: Center(
               child: Text(
-                '$textStr [PadLandscape]',
+                '${widget.textStr} [PadLandscape]',
                 style: TextStyle(fontSize: 18.0, color: Colors.black),
               ),
             ),
@@ -168,7 +179,7 @@ class MyCustomStatelessPage extends CustomFlexibleStatelessWidget {
             color: Colors.lightGreenAccent,
             child: Center(
               child: Text(
-                '$textStr [PadLandscape]',
+                '${widget.textStr} [PadLandscape]',
                 style: TextStyle(fontSize: 18.0, color: Colors.black),
               ),
             ),
