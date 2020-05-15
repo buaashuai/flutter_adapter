@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_adapter/flexible_stateless_widget.dart';
+import 'package:flutter_adapter/flutter_adapter.dart';
 
 class MyStatelessPage extends FlexibleStatelessWidget {
   final String textStr;

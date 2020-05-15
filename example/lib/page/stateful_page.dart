@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_adapter/flexible_state.dart';
+import 'package:flutter_adapter/flutter_adapter.dart';
 
 class MyStatefulPage extends StatefulWidget {
   final String textStr;

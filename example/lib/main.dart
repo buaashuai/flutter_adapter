@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 
-import 'package:flutter/services.dart';
-import 'package:flutter_adapter/adapter_screen.dart';
-import 'package:flutter_adapter/flexible_state.dart';
-import 'package:flutter_adapter/flexible_stateless_widget.dart';
 import 'package:flutter_adapter/flutter_adapter.dart';
 import 'package:flutter_adapter_example/constant.dart';
 import 'package:flutter_adapter_example/page/custom_stateful_page.dart';

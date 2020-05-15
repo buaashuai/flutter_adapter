@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_adapter/flexible_stateless_widget.dart';
 import 'package:flutter_adapter_example/adapter/custom_state.dart';
-import 'package:flutter_adapter_example/adapter/custom_stateless_widget.dart';
-import 'package:flutter_adapter_example/constant.dart';
 
 class MyCustomStatefulPage extends StatefulWidget {
   final String textStr;

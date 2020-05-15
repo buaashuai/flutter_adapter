@@ -1,12 +1,5 @@
-import 'dart:async';
+library flutter_adapter;
 
-import 'package:flutter/services.dart';
-
-class FlutterAdapter {
-  static const MethodChannel _channel = const MethodChannel('flutter_adapter');
-
-  static Future<String> get platformVersion async {
-    final String version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-}
+export 'adapter_screen.dart';
+export 'flexible_state.dart';
+export 'flexible_stateless_widget.dart';
