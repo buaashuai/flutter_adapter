@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 // support platforms
 enum TEAdaptPlatform {
   phone,
+  phoneLandscape,
   padPortrait, // Pad
   padLandscape, // Pad
 }
@@ -96,8 +97,9 @@ class InheritedScreenAdaptWidget extends InheritedWidget {
 class ScreenAdaptWidget extends StatefulWidget {
   final Widget child;
   final String platform;
+  final bool autoOrientation; // If automatically change the widget's style according to the screen's orientation
 
-  ScreenAdaptWidget({@required this.child, @required this.platform});
+  ScreenAdaptWidget({@required this.child, @required this.platform, this.autoOrientation = false});
 
   @override
   State<StatefulWidget> createState() {
@@ -105,25 +107,69 @@ class ScreenAdaptWidget extends StatefulWidget {
   }
 }
 
-class _ScreenAdaptWidgetState extends State<ScreenAdaptWidget> {
+class _ScreenAdaptWidgetState extends State<ScreenAdaptWidget> with WidgetsBindingObserver {
   InheritedScreenAdaptModel inheritedScreenAdaptModel;
 
   _initData() {
-    inheritedScreenAdaptModel = _adaptScreen(screenKey: widget.platform);
+    String screenKey = widget.platform;
+    if (widget.autoOrientation) {
+      Orientation orientation = MediaQuery.of(context).orientation;
+      if (orientation == Orientation.landscape) {
+        if (widget.platform == TEAdaptPlatform.padPortrait.toString()) {
+          screenKey = TEAdaptPlatform.padLandscape.toString();
+        } else if (widget.platform == TEAdaptPlatform.phone.toString()) {
+          screenKey = TEAdaptPlatform.phoneLandscape.toString();
+        }
+      } else if (orientation == Orientation.portrait) {
+        if (widget.platform == TEAdaptPlatform.padLandscape.toString()) {
+          screenKey = TEAdaptPlatform.padPortrait.toString();
+        } else if (widget.platform == TEAdaptPlatform.phoneLandscape.toString()) {
+          screenKey = TEAdaptPlatform.phone.toString();
+        }
+      }
+    }
+    inheritedScreenAdaptModel = _adaptScreen(screenKey: screenKey);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _initData();
   }
 
   @override
   void initState() {
-    _initData();
     super.initState();
+    if (widget.autoOrientation) {
+      WidgetsBinding.instance.addObserver(this);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    if (widget.autoOrientation) {
+      WidgetsBinding.instance.removeObserver(this);
+    }
+  }
+
+  @override
+  void didChangeMetrics() {
+    Size screen = MediaQuery.of(context).size; // This is the screen size before screen direction changed.
+    Orientation orientation = screen.width > screen.height ? Orientation.portrait : Orientation.landscape;
+    if (widget.autoOrientation && orientation == Orientation.portrait && inheritedScreenAdaptModel.adaptModelKey == TEAdaptPlatform.phoneLandscape.toString()) {
+      _changeScreenModel(context, screenKey: TEAdaptPlatform.phone.toString());
+    } else if (widget.autoOrientation &&
+        orientation == Orientation.landscape &&
+        (inheritedScreenAdaptModel.adaptModelKey == TEAdaptPlatform.phone.toString())) {
+      _changeScreenModel(context, screenKey: TEAdaptPlatform.phoneLandscape.toString());
+    }
   }
 
   _changeScreenModel(BuildContext context, {String screenKey}) {
-//    String re = screenKey + new DateTime.now().toString();
     setState(() {
       inheritedScreenAdaptModel = _adaptScreen(context: context, screenKey: screenKey);
     });
-//    print('ADAPT_SCREEN: _changeScreenModel phone: ' + screenKey.toString());
   }
 
   @override

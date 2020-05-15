@@ -14,6 +14,11 @@ abstract class FlexibleStatelessWidget extends StatelessWidget {
   Widget buildPhone(BuildContext context);
 
   @protected
+  Widget buildPhoneLandscape(BuildContext context){
+    return buildPhone(context);
+  }
+
+  @protected
   Widget buildPadPortrait(BuildContext context) {
     return buildPhone(context);
   }
@@ -34,6 +39,7 @@ abstract class FlexibleStatelessWidget extends StatelessWidget {
   @protected
   void initAdapter() {
     addAdapter(TEAdaptPlatform.phone.toString(), buildPhone);
+    addAdapter(TEAdaptPlatform.phoneLandscape.toString(), buildPhoneLandscape);
     addAdapter(TEAdaptPlatform.padPortrait.toString(), buildPadPortrait);
     addAdapter(TEAdaptPlatform.padLandscape.toString(), buildPadLandscape);
   }
