@@ -120,6 +120,75 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
   }
 
   @override
+  Widget buildPhoneLandscape(BuildContext context) {
+    return Container(
+      child: Row(
+        children: <Widget>[
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.all(10.0),
+              margin: EdgeInsets.only(bottom: 0.0),
+              width: 200.0,
+              height: 200.0,
+              color: Colors.yellow,
+              child: Center(
+                child: Text(
+                  '${widget.textStr} [PhoneLandscape]',
+                  style: TextStyle(fontSize: 18.0, color: Colors.black),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: <Widget>[
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    margin: EdgeInsets.only(bottom: 0.0),
+                    width: double.infinity,
+                    height: 100.0,
+                    color: Colors.lightGreenAccent,
+                    child: Center(
+                      child: Text(
+                        '${widget.textStr} [PhoneLandscape]',
+                        style: TextStyle(fontSize: 18.0, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 1.0,
+                  color: Colors.black26,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    padding: EdgeInsets.all(10.0),
+                    margin: EdgeInsets.only(bottom: 0.0),
+                    width: double.infinity,
+                    height: 100.0,
+                    color: Colors.lightGreenAccent,
+                    child: Center(
+                      child: Text(
+                        '${widget.textStr} [PhoneLandscape]',
+                        style: TextStyle(fontSize: 18.0, color: Colors.black),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  @override
   Widget buildPadPortrait(BuildContext context) {
     return Column(
       children: <Widget>[

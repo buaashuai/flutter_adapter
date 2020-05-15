@@ -17,7 +17,7 @@ import 'package:flutter_adapter_example/page/stateless_page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final bool isCustomPlatform = true; //change this variable to true then you will see a user self-defined adapter example
+  final bool isCustomPlatform = false; //change this variable to true then you will see a user self-defined adapter example
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
           },
           child: ScreenAdaptWidget(
             platform: isCustomPlatform ? Constant.newPlatform : TEAdaptPlatform.phone.toString(),
+            autoOrientation: true,
             child: Navigator(
               key: Constant.globalNavigatorKey,
               initialRoute: isCustomPlatform ? Constant.pageCustomPlatform : Constant.home,
