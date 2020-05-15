@@ -1,6 +1,6 @@
 # flutter_adapter
 
-一个解决flutter应用适配不同平台的插件，让你的flutter应用在一个工程中灵活高效的适配各种平台，实现UI最大化复用，业务逻辑代码在不同平台间完全共享。
+一个解决flutter应用适配不同平台的插件，让你的flutter应用在一个工程中灵活高效的适配各种平台，实现UI最大化复用，业务逻辑代码在不同平台间完全共享，支持根据屏幕方向实时选择不同的布局样式。
 
 
 ## 不同平台适配效果
@@ -8,10 +8,11 @@
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/phone.gif" width = "240" height = "500" />
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadLandscape.gif" width = "960" height = "600" />
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "480" height = "768" />
+<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/autoOrientation.gif" width = "600" height = "600" />
 
 ## 使用方式
 
-flutter_adapter插件内置了3类平台，分别是：手机（TEAdaptPlatform.phone）、pad横屏（TEAdaptPlatform.padLandscape）、pad竖屏（TEAdaptPlatform.padPortrait）
+flutter_adapter插件内置了4类平台，分别是：手机（TEAdaptPlatform.phone）、手机横屏（TEAdaptPlatform.phoneLandscape）、pad横屏（TEAdaptPlatform.padLandscape）、pad竖屏（TEAdaptPlatform.padPortrait）
 。如果你只适配部分平台，那么只需要对待适配的widget实现特定平台的build函数即可，其他未适配的平台默认会返回Phone的样式。<br>
 使用的时候只需要在APP的入口处采用ScreenAdaptWidget，然后设置当前APP需要适配的平台名称即可。
 
@@ -22,6 +23,7 @@ flutter_adapter插件内置了3类平台，分别是：手机（TEAdaptPlatform.
 ```
 ScreenAdaptWidget(
     platform: TEAdaptPlatform.phone.toString(),
+    autoOrientation: true, // 是否根据屏幕方向自适应布局
     child: 任意widget
 )),
 ```

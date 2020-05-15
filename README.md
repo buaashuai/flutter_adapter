@@ -1,6 +1,6 @@
 # flutter_adapter
 
-A plugin that adapts the flutter application to different platforms, allowing your flutter application to flexibly and efficiently adapt to various platforms in the same flutter project, maximizing UI multiplexing, and sharing business logic code across different platforms.
+A plugin that adapts the flutter application to different platforms, allowing your flutter application to flexibly and efficiently adapt to various platforms in the same flutter project, maximizing UI multiplexing, and sharing business logic code across different platforms. Support to select different layout styles in real time according to the screen orientation.
 <br><br>
 <font size=8>[Readme for Chinese](https://github.com/buaashuai/flutter_adapter/blob/master/README-cn.md)</font>
 
@@ -9,10 +9,11 @@ A plugin that adapts the flutter application to different platforms, allowing yo
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/phone.gif" width = "240" height = "500" />
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadLandscape.gif" width = "960" height = "600" />
 <img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/PadPortrait.gif" width = "480" height = "768" />
+<img src="https://raw.githubusercontent.com/buaashuai/flutter_adapter/master/preview/autoOrientation.gif" width = "600" height = "600" />
 
 ## Usage
 
-The flutter_adapter plugin has three built-in platforms: mobile phone (TEAdaptPlatform.phone), pad horizontal screen (TEAdaptPlatform.padLandscape), pad vertical screen (TEAdaptPlatform.padPortrait). If you only need to adapt part of platforms, you only need to make the widget implement the platform-specific build function. Other unsuited platforms will return the Phone style by default.
+The flutter_adapter plugin has four built-in platforms: mobile phone (TEAdaptPlatform.phone), mobile phone horizontal (TEAdaptPlatform.phoneLandscape), pad horizontal screen (TEAdaptPlatform.padLandscape), pad vertical screen (TEAdaptPlatform.padPortrait). If you only need to adapt part of platforms, you only need to make the widget implement the platform-specific build function. Other unsuited platforms will return the Phone style by default.
 
 If you need to extend the adapted platform, you only need to implement an abstract class that inherits from FlexibleStatelessWidget for StatelessWidget, then implement the build function of the new platform and register the platform. As for StatefulWidget, you only need to implement an abstract class that inherits from FlexibleState, and then Implement the build function of the new platform and register the platform.
 
@@ -22,6 +23,7 @@ When you use flutter_adapter, you only need to use ScreenAdaptWidget at the entr
 ```
 ScreenAdaptWidget(
     platform: TEAdaptPlatform.phone.toString(),
+    autoOrientation: true, // Whether to select different layout styles in real time according to the screen orientation
     child: any widget
 )),
 ```
