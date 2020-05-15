@@ -51,7 +51,7 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
         GestureDetector(
           onTap: () {
             Constant.globalNavigatorKey.currentState.pushNamed(
-              Constant.page1,
+              Constant.page4,
             );
           },
           child: Container(
@@ -71,7 +71,7 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
         GestureDetector(
           onTap: () {
             Constant.globalNavigatorKey.currentState.pushNamed(
-              Constant.page2,
+              Constant.page4,
             );
           },
           child: Container(
@@ -118,7 +118,8 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
       child: Row(
         children: <Widget>[
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+            },
             child: Container(
               padding: EdgeInsets.all(10.0),
               margin: EdgeInsets.only(bottom: 0.0),
@@ -137,7 +138,11 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
             child: Column(
               children: <Widget>[
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Constant.globalNavigatorKey.currentState.pushNamed(
+                      Constant.page4,
+                    );
+                  },
                   child: Container(
                     padding: EdgeInsets.all(10.0),
                     margin: EdgeInsets.only(bottom: 0.0),
@@ -146,7 +151,7 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
                     color: Colors.lightGreenAccent,
                     child: Center(
                       child: Text(
-                        '${widget.textStr} [PhoneLandscape]',
+                        '${widget.textStr} [PhoneLandscape] [click me]',
                         style: TextStyle(fontSize: 18.0, color: Colors.black),
                       ),
                     ),
@@ -158,7 +163,11 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
                   color: Colors.black26,
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Constant.globalNavigatorKey.currentState.pushNamed(
+                      Constant.page4,
+                    );
+                  },
                   child: Container(
                     padding: EdgeInsets.all(10.0),
                     margin: EdgeInsets.only(bottom: 0.0),
@@ -167,7 +176,7 @@ class MyStatefulWidgetState extends FlexibleState<MyStatefulWidget> {
                     color: Colors.lightGreenAccent,
                     child: Center(
                       child: Text(
-                        '${widget.textStr} [PhoneLandscape]',
+                        '${widget.textStr} [PhoneLandscape] [click me]',
                         style: TextStyle(fontSize: 18.0, color: Colors.black),
                       ),
                     ),

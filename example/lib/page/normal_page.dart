@@ -21,6 +21,9 @@ class MyNormalPage extends StatelessWidget {
                 TEAdaptPlatform.phone.toString(): () {
                   print('tab me on ${TEAdaptPlatform.phone.toString()}');
                 },
+                TEAdaptPlatform.phoneLandscape.toString(): () {
+                  print('tab me on ${TEAdaptPlatform.phoneLandscape.toString()}');
+                },
                 TEAdaptPlatform.padPortrait.toString(): () {
                   print('tab me on ${TEAdaptPlatform.padPortrait.toString()}');
                 },
@@ -34,11 +37,12 @@ class MyNormalPage extends StatelessWidget {
               margin: EdgeInsets.only(bottom: 30.0),
               width: double.infinity,
               height: 100.0,
-              color: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): Colors.yellow, TEAdaptPlatform.padPortrait.toString(): Colors.greenAccent}),
+              color: superObjectAdapter(context, {TEAdaptPlatform.phone.toString(): Colors.yellow,TEAdaptPlatform.phoneLandscape.toString(): Colors.green, TEAdaptPlatform.padPortrait.toString(): Colors.greenAccent}),
               child: Center(
                 child: Text(
                   '$textStr ${superObjectAdapter(context, {
                     TEAdaptPlatform.phone.toString(): "[Phone]",
+                    TEAdaptPlatform.phoneLandscape.toString(): "[phoneLandscape]",
                     TEAdaptPlatform.padPortrait.toString(): "[PadPortrait]",
                     Constant.newPlatform: "[newPlatform]"
                   })} \n [click me]',
