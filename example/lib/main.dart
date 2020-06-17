@@ -55,7 +55,7 @@ class TEPageRoute extends MaterialPageRoute {
           builder: builder,
           fullscreenDialog: false,
           maintainState: true,
-          settings: RouteSettings(name: name, isInitialRoute: !animated),
+          settings: RouteSettings(name: name),
         );
 }
 

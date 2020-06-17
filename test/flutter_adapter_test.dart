@@ -5,6 +5,8 @@ import 'package:flutter_adapter/flutter_adapter.dart';
 void main() {
   const MethodChannel channel = MethodChannel('flutter_adapter');
 
+  TestWidgetsFlutterBinding.ensureInitialized();
+
   setUp(() {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       return '42';
