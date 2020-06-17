@@ -1,3 +1,7 @@
+## 1.0.4
+
+* plugin update to the v2 Android Plugin APIs
+
 ## 1.0.3
 
 * Support to select different layout styles in real time according to the screen orientation.
